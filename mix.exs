@@ -9,7 +9,18 @@ defmodule PhoenixCounter.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        c: :test,
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.json": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        t: :test
+      ]
+
     ]
   end
 
@@ -41,16 +52,17 @@ defmodule PhoenixCounter.MixProject do
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
-       github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
-       sparse: "optimized",
-       app: false,
-       compile: false,
-       depth: 1},
+        github: "tailwindlabs/heroicons",
+        tag: "v2.1.1",
+        sparse: "optimized",
+        app: false,
+        compile: false,
+        depth: 1},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
+      {:excoveralls, "~> 0.16.0", only: [:test, :dev]},
       {:bandit, "~> 1.5"}
     ]
   end
@@ -70,7 +82,10 @@ defmodule PhoenixCounter.MixProject do
         "tailwind phoenix_counter --minify",
         "esbuild phoenix_counter --minify",
         "phx.digest"
-      ]
+      ],
+      c: ["coveralls.html"],
+      s: ["phx.server"],
+      t: ["test"]
     ]
   end
 end

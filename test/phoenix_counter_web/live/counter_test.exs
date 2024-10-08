@@ -3,6 +3,6 @@ defmodule PhoenixCounterWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "The count is"
+    assert html_response(conn, 200) =~ "Counter: 0"
   end
 end
