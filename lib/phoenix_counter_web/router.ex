@@ -1,4 +1,5 @@
 defmodule PhoenixCounterWeb.Router do
+  alias PhoenixCounterWeb.Flowbite
   use PhoenixCounterWeb, :router
 
   pipeline :browser do
@@ -18,6 +19,7 @@ defmodule PhoenixCounterWeb.Router do
     pipe_through :browser
 
     live "/", Counter
+    live "/flowbite", Flowbite
   end
 
   # Other scopes may use custom stacks.
