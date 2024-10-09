@@ -1,5 +1,5 @@
 defmodule PhoenixCounterWeb.Router do
-  alias PhoenixCounterWeb.Flowbite
+  alias PhoenixCounterWeb.Live.TestFlowbite
   use PhoenixCounterWeb, :router
 
   pipeline :browser do
