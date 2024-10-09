@@ -1,5 +1,6 @@
-defmodule PhoenixCounterWeb.PageControllerTest do
+defmodule PhoenixCounterWeb.CounterTest do
   use PhoenixCounterWeb.ConnCase
+  import Phoenix.LiveViewTest
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
