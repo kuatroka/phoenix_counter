@@ -1,10 +1,9 @@
 defmodule CounterComponent do
   use Phoenix.LiveComponent
 
-  # Avoid duplicating Tailwind classes and show hot to inline a function call:
-  defp btn(color) do
-    "text-6xl pb-2 w-20 rounded-lg bg-#{color}-500 hover:bg-#{color}-600"
-  end
+  # Avoid duplicating Tailwind classes and use full class names:
+  defp btn("red"), do: "text-6xl pb-2 w-20 rounded-lg bg-red-500 hover:bg-red-600"
+  defp btn("green"), do: "text-6xl pb-2 w-20 rounded-lg bg-green-500 hover:bg-green-600"
 
   def render(assigns) do
     ~H"""
