@@ -9,23 +9,20 @@ defmodule PhoenixCounterWeb.CounterTest do
 
   test "Increment", %{conn: conn} do
     {:ok, view, html} = live(conn, "/")
-    current = Counter.Count.current()
-    assert html =~ "Counter: #{current}"
-    assert render_click(view, :inc) =~ "Counter: #{current + 1}"
+    assert html =~ "Counter: 0"
+    assert render_click(view, :inc) =~ "Counter: 1"
   end
 
   test "Decrement", %{conn: conn} do
     {:ok, view, html} = live(conn, "/")
-    current = Counter.Count.current()
-    assert html =~ "Counter: #{current}"
-    assert render_click(view, :dec) =~ "Counter: #{current - 1}"
+    assert html =~ "Counter: 0"
+    assert render_click(view, :dec) =~ "Counter: -1"
   end
 
   test "handle_info/2 Count Update", %{conn: conn} do
     {:ok, view, disconnected_html} = live(conn, "/")
-    current = Counter.Count.current()
-    assert disconnected_html =~ "Counter: #{current}"
-    assert render(view) =~ "Counter: #{current}"
+    assert disconnected_html =~ "Counter: 0"
+    assert render(view) =~ "Counter: 0"
     send(view.pid, {:count, 2})
     assert render(view) =~ "Counter: 2"
   end
