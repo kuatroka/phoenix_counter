@@ -9,7 +9,8 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/phoenix_counter_web.ex",
-    "../lib/phoenix_counter_web/**/*.*ex"
+    "../lib/phoenix_counter_web/**/*.*ex",
+    "../lib/phoenix_counter_web/live/*.*ex"
   ],
   theme: {
     extend: {

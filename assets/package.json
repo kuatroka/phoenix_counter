@@ -1,0 +1,15 @@
+{
+  "name": "phoenix_counter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tailwindcss build -o ../priv/static/assets/app.css",
+    "watch": "tailwindcss build -o ../priv/static/assets/app.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.0",
+    "postcss": "^8.0.0",
+    "autoprefixer": "^10.0.0",
+    "@tailwindcss/forms": "^0.4.0"
+  }
+}

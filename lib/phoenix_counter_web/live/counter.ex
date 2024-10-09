@@ -1,35 +1,31 @@
 defmodule PhoenixCounterWeb.Counter do
   use PhoenixCounterWeb, :live_view
+  alias Counter.Count
+  alias Phoenix.PubSub
 
-  @topic "live"
+  @topic Count.topic
 
   def mount(_params, _session, socket) do
+    val = Count.current()  # Get the current value
     if connected?(socket) do
-      PhoenixCounterWeb.Endpoint.subscribe(@topic)
+      PubSub.subscribe(PhoenixCounter.PubSub, @topic)  # Corrected PubSub name
+      {:ok, assign(socket, val: val)}
+    else
+      {:ok, assign(socket, val: val)}  # Assign default value when not connected
     end
-
-    {:ok, assign(socket, :val, 0)}
   end
 
-  def handle_event("inc", _value, socket) do
-    new_state = update(socket, :val, &(&1 + 1))
-    PhoenixCounterWeb.Endpoint.broadcast_from(self(), @topic, "inc", new_state.assigns)
-
-    {:noreply, new_state}
+  def handle_event("inc", %{"value" => _value}, socket) do
+    {:noreply, assign(socket, :val, Count.incr())}
   end
 
-  def handle_event("dec", _value, socket) do
-    new_state = update(socket, :val, &(&1 - 1))
-    PhoenixCounterWeb.Endpoint.broadcast_from(self(), @topic, "dec", new_state.assigns)
-
-    {:noreply, new_state}
+  def handle_event("dec", %{"value" => _value}, socket) do
+    {:noreply, assign(socket, :val, Count.decr())}
   end
 
-  def handle_info(msg, socket) do
-    {:noreply, assign(socket, :val, msg.payload.val)}
-
+  def handle_info({:count, count}, socket) do
+    {:noreply, assign(socket, val: count)}
   end
-
 
   def render(assigns) do
     ~H"""

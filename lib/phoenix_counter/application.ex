@@ -11,7 +11,7 @@ defmodule PhoenixCounter.Application do
       PhoenixCounterWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:phoenix_counter, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PhoenixCounter.PubSub},
-      {Counter.Count, name: Counter.Count}, # Start the Count GenServer
+      Counter.Count, # Start the Count GenServer
       # Start a worker by calling: PhoenixCounter.Worker.start_link(arg)
       # {PhoenixCounter.Worker, arg},
       # Start to serve requests, typically the last entry

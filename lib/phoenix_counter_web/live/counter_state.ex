@@ -1,8 +1,7 @@
 defmodule Counter.Count do
   use GenServer
   alias Phoenix.PubSub
-
-  @name Counter.Count # Use the module name as the GenServer name
+  @name :count_server
 
   @start_value 0
 
@@ -35,7 +34,7 @@ defmodule Counter.Count do
   # Implementation (Runs in GenServer process)
 
   def handle_call(:current, _from, count) do
-    {:reply, count, count}
+     {:reply, count, count}
   end
 
   def handle_call(:incr, _from, count) do
@@ -48,7 +47,7 @@ defmodule Counter.Count do
 
   defp make_change(count, change) do
     new_count = count + change
-    PubSub.broadcast(PhoenixCounter.PubSub, topic(), {:count, new_count}) # Use the correct PubSub name
+    PubSub.broadcast(PhoenixCounter.PubSub, topic(), {:count, new_count})  # Updated PubSub name
     {:reply, new_count, new_count}
   end
 end
