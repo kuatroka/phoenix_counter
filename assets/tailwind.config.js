@@ -10,7 +10,8 @@ module.exports = {
     "./js/**/*.js",
     "../lib/phoenix_counter_web.ex",
     "../lib/phoenix_counter_web/**/*.*ex",
-    "../lib/phoenix_counter_web/live/*.*ex"
+    "../lib/phoenix_counter_web/live/*.*ex",
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
     extend: {
@@ -20,6 +21,8 @@ module.exports = {
     },
   },
   plugins: [
+    require('flowbite/plugin'),
+    // require('daisyui'),
     require("@tailwindcss/forms"),
     // Allows prefixing tailwind classes with LiveView classes to add rules
     // only when LiveView classes are applied, for example:
